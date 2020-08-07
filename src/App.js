@@ -5,7 +5,13 @@ export class App extends Component {
 		file: ''
 	};
 	onChangeHandler = (e) => {
-		this.setState({ file: e.target.value });
+		const reader = new FileReader();
+    reader.onload = () =>{
+      if(reader.readyState === 2){
+        this.setState({file: reader.result})
+      }
+    }
+    reader.readAsDataURL(e.target.files[0])
 	};
 	render() {
 		return (
